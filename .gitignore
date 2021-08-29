@@ -130,3 +130,4 @@ dmypy.json
 
 Tasks.csv
 save_env_keys.py
+.idea

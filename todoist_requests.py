@@ -4,10 +4,12 @@ from handle_email import HandleEmail
 
 # Dictionary of todoist label ids that can be assigned
 label_ids = {
-    "personal": 2157991715,
-    "work": 2157991720,
-    "college": 2157991727,
-    "personal-growth": 2157991879,
+    "Personal": 2157991715,
+    "Work": 2157991720,
+    "College": 2157991727,
+    "Personal Growth": 2157991879,
+    "Daily": 2157998666,
+    "Daily Work Task": 2157998668,
 }
 
 
@@ -22,14 +24,12 @@ class TodoistRequests(HandleEmail):
         """
         Helper function to assign label id based on 'Related to' tab in notion
         """
-        if label == "Personal Growth":
-            return [label_ids["personal-growth"]]
-        elif label == "Work":
-            return [label_ids["work"]]
-        elif label == "Personal":
-            return [label_ids["personal"]]
-        elif label == "College":
-            return [label_ids["college"]]
+        for key in label_ids:
+            if key == label:
+                return [label_ids[label]]
+            else:
+                continue
+        return []
 
     def assign_priority(self, priority_text):
         """
@@ -85,7 +85,7 @@ class TodoistRequests(HandleEmail):
         for task in all_tasks:
             delete_url = f"{self.base_url}/tasks/{task['id']}"
             requests.delete(url=delete_url, headers=self.headers)
-            super().add_to_msg(f"Active tasks deleted from todoist. URL: {delete_url}")
+            super().add_to_msg(f"Active tasks deleted from todoist. ID: {task['id']}")
         super().add_to_msg("\n\n")
 
         super().add_to_msg("Yesterday's task were deleted...")

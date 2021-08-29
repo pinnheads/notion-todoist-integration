@@ -19,8 +19,10 @@ class HandleEmail:
         """
         global msg_txt
         if text == "\n\n":
+            print(f"{text}")
             msg_txt += f"{text}"
         else:
+            print(f"{self.today} - {text}")
             msg_txt += f"{self.today} - {text}\n"
 
     def send_email(self):
@@ -32,7 +34,6 @@ class HandleEmail:
         if email_text != "":
             with smtplib.SMTP("smtp.gmail.com") as connection:
                 print("Connection Established")
-                print(email_text)
                 connection.starttls()
                 connection.login(user=self.smtp_email, password=self.password)
                 connection.sendmail(
@@ -40,6 +41,6 @@ class HandleEmail:
                     to_addrs=self.my_email,
                     msg=email_text,
                 )
-            print(f"Email sent to {self.my_email}")
+            print(f"Email sent to {self.my_email} from {self.smtp_email}")
         else:
             print("Something went wrong")
