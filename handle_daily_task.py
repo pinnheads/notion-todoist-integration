@@ -17,7 +17,9 @@ class HandleDailyTask(HandleEmail):
         }
         self.date_today = (dt.datetime.now()).strftime("%Y-%m-%d")
         self.day_tmrw = (dt.datetime.now() + dt.timedelta(days=1)).strftime("%A")
-        self.tasks = (pd.read_csv("Tasks.csv", sep=",")).to_dict(orient="records")
+        self.tasks = (pd.read_csv("./Data/Tasks.csv", sep=",")).to_dict(
+            orient="records"
+        )
 
     def decide_tmrw(self, label):
         """

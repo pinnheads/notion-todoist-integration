@@ -1,4 +1,3 @@
-from os import sep
 from handle_notion_data import HandleNotionData
 from handle_daily_task import HandleDailyTask
 from todoist_requests import TodoistRequests
@@ -14,7 +13,7 @@ daily_task = HandleDailyTask()
 hd.add_tasks_csv()
 
 # Prepare a list of dictionaries of tasks from notion
-df = pd.read_csv("./Tasks.csv", sep=",")
+df = pd.read_csv("./Data/Tasks.csv", sep=",")
 task_list = df.to_dict(orient="records")
 
 # Create tasks in todoist from notion

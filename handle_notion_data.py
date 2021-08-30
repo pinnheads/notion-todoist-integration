@@ -50,5 +50,5 @@ class HandleNotionData(NotionRequests, HandleEmail):
         # Create a dataframe
         df = pd.DataFrame(self.task_list)
         # Add the dataframe to csv
-        df.to_csv("./Tasks.csv", sep=",", index=False)
+        df.to_csv("./Data/Tasks.csv", sep=",", index=False)
         super().add_to_msg("[Internal] - Week worth of task added to the csv file...")
