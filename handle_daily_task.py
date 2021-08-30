@@ -20,6 +20,10 @@ class HandleDailyTask(HandleEmail):
         self.tasks = (pd.read_csv("Tasks.csv", sep=",")).to_dict(orient="records")
 
     def decide_tmrw(self, label):
+        """
+        Helper function to decide what date to pass for tomorrow based on the
+        type of task.
+        """
         if label == "Daily":
             return (dt.datetime.now() + dt.timedelta(days=1)).strftime("%Y-%m-%d")
         elif label == "Daily Work Task" and self.day_tmrw == "Saturday":
@@ -28,16 +32,19 @@ class HandleDailyTask(HandleEmail):
             return (dt.datetime.now() + dt.timedelta(days=1)).strftime("%Y-%m-%d")
 
     def format_id(self, id):
+        """Removes '-' from ids passed from notion"""
         id_list = id.split("-")
         return "".join(id_list)
 
     def send_patch_req(self, id, body, msg):
+        """Sends a patch request to notion api"""
         patch_url = f"{self.base_url}{id}"
         response = requests.patch(url=patch_url, headers=self.headers, json=body)
         response.raise_for_status()
         super().add_to_msg(msg)
 
     def update_daily_tasks(self):
+        """Sets the daily-task for the next day based on the type of task"""
         for task in self.tasks:
             if (
                 task["Related To"] == "Daily"
