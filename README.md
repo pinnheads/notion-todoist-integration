@@ -9,7 +9,7 @@ and it works out great for me.
 
 ![Notion](./notion_web-view.png)
 
-The problem is that notion currently dosen't have a widget for android phone and sometimes the layout on the phone appears weirded out. So I decided to use todoist
+The problem is that notion currently doesn't have a widget for android phone and sometimes the layout on the phone appears weirded out. So I decided to use todoist
 app to build kind of an automated widget which shows all of my notion tasks 
 right on the home screen.
 
