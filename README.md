@@ -15,7 +15,7 @@ right on the home screen.
 
 ![Todoist](./todoist_widget.jpeg)
 
-After it the tasks have been run it emails me the logs of the run.
+After the tasks have been run it emails me the logs of the run.
 
 ![Email](./web-email.png)
 
