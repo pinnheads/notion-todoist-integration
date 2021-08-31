@@ -43,10 +43,13 @@ class HandleDailyTask(HandleEmail):
         patch_url = f"{self.base_url}{id}"
         response = requests.patch(url=patch_url, headers=self.headers, json=body)
         response.raise_for_status()
+        # print(response.status_code)
         super().add_to_msg(msg)
 
     def update_daily_tasks(self):
         """Sets the daily-task for the next day based on the type of task"""
+        print("Received request to update the daily tasks.")
+        super().add_to_msg("Received request to update the daily tasks. \n")
         for task in self.tasks:
             if (
                 task["Related To"] == "Daily"
