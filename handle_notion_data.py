@@ -28,12 +28,19 @@ class HandleNotionData(NotionRequests, HandleEmail):
             else:
                 new_task = {
                     "id": task["id"],
-                    "Name": task["properties"]["Name"]["title"][0]["plain_text"],
+                    "Name": task["properties"]["Name"]["title"][0][
+                        "plain_text"
+                    ],
                     "Status": task["properties"]["Status"]["select"]["name"],
-                    "Related To": task["properties"]["Related To"]["select"]["name"],
-                    "Priority": task["properties"]["Priority"]["select"]["name"],
-                    "ToDo On - Start": task["properties"]["ToDo On"]["date"]["start"],
-                    "ToDo On - End": task["properties"]["ToDo On"]["date"]["end"],
+                    "Related To": task["properties"]["Related To"]["select"][
+                        "name"
+                    ],
+                    "Priority": task["properties"]["Priority"]["select"][
+                        "name"
+                    ],
+                    "ToDo On - Start": task["properties"]["ToDo On"]["date"][
+                        "start"
+                    ],
                 }
                 self.task_list.append(new_task)
                 super().add_to_msg(
@@ -51,4 +58,6 @@ class HandleNotionData(NotionRequests, HandleEmail):
         df = pd.DataFrame(self.task_list)
         # Add the dataframe to csv
         df.to_csv("./Data/Tasks.csv", sep=",", index=False)
-        super().add_to_msg("[Internal] - Week worth of task added to the csv file...")
+        super().add_to_msg(
+            "[Internal] - Week worth of task added to the csv file..."
+        )

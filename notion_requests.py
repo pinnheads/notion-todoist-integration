@@ -4,7 +4,9 @@ import datetime as dt
 from handle_email import HandleEmail
 
 # Get the week later date from now
-week_later = (dt.datetime.now() + dt.timedelta(days=7)).strftime("%Y-%m-%dT21:00:00Z")
+week_later = (dt.datetime.now() + dt.timedelta(days=7)).strftime(
+    "%Y-%m-%dT21:00:00Z"
+)
 weekly_task_query = {
     "filter": {
         "and": [

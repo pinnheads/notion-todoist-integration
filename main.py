@@ -22,7 +22,7 @@ td.create_task(task_list)
 
 # Update daily task for next day
 email_handler.add_to_msg("\n\n")
-daily_task.update_daily_tasks()
+daily_task.update_daily_tasks(task_list)
 
 # Send email with all the logs
-email_handler.send_email()
+# email_handler.send_email()

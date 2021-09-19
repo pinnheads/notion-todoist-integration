@@ -72,7 +72,9 @@ class TodoistRequests(HandleEmail):
                 "priority": self.assign_priority(task["Priority"]),
                 "due_date": task["ToDo On - Start"],
             }
-            response = requests.post(url=post_url, headers=headers, json=new_task)
+            response = requests.post(
+                url=post_url, headers=headers, json=new_task
+            )
             response.raise_for_status()
             super().add_to_msg(f"[Task] - {task['Name']} created")
 
@@ -85,7 +87,9 @@ class TodoistRequests(HandleEmail):
         for task in all_tasks:
             delete_url = f"{self.base_url}/tasks/{task['id']}"
             requests.delete(url=delete_url, headers=self.headers)
-            super().add_to_msg(f"Active tasks deleted from todoist. ID: {task['id']}")
+            super().add_to_msg(
+                f"Active tasks deleted from todoist. ID: {task['id']}"
+            )
         super().add_to_msg("\n\n")
 
         super().add_to_msg("Yesterday's task were deleted...")
