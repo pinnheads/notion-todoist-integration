@@ -21,20 +21,18 @@ class HandleProjects:
     #         self.delete_all_projects()
 
     def delete_all_projects(self):
-        try:
-            df = pd.read_csv("./Data/projects.csv", sep=",")
-            projects = df.to_dict(orient="records")
-        except FileNotFoundError:
-            return FileNotFoundError
-        else:
-            for project in projects:
-                requests.delete(
-                    f"https://api.todoist.com/rest/v1/projects/{project['project_id']}",
-                    headers={"Authorization": self.auth_key},
-                )
-            print("Deleted all the Projects")
-            os.remove("Data/projects.csv")
-            print("Deleted projects csv file")
+        projects = requests.get(
+            "https://api.todoist.com/rest/v1/projects",
+            headers={"Authorization": self.auth_key},
+        ).json()
+        for project in projects:
+            requests.delete(
+                f"https://api.todoist.com/rest/v1/projects/{project['id']}",
+                headers={"Authorization": self.auth_key},
+            )
+        print("Deleted all the Projects")
+        os.remove("Data/projects.csv")
+        print("Deleted projects csv file")
 
     def create_project(self, project_name):
         project_not_exist = self.check_project(project_name)
