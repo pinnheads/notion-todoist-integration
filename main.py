@@ -14,6 +14,8 @@ hd.add_tasks_csv()
 
 # Prepare a list of dictionaries of tasks from notion
 df = pd.read_csv("./Data/Tasks.csv", sep=",")
+df = df.fillna(0)
+print(df)
 task_list = df.to_dict(orient="records")
 
 # Create tasks in todoist from notion

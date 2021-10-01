@@ -9,13 +9,7 @@ week_later = (dt.datetime.now() + dt.timedelta(days=7)).strftime(
 )
 weekly_task_query = {
     "filter": {
-        "and": [
-            {
-                "property": "ToDo On",
-                "date": {"on_or_before": week_later},
-            },
-            {"property": "Status", "select": {"equals": "To Do"}},
-        ]
+        "and": [{"property": "Status", "select": {"does_not_equal": "Done"}}]
     }
 }
 
@@ -40,5 +34,5 @@ class NotionRequests(HandleEmail):
         )
         response.raise_for_status()
         data = response.json()
-        super().add_to_msg("Tasks data fetched from notion...")
+        super().add_to_msg("[Internal] - Tasks data fetched from notion")
         return data

@@ -60,11 +60,11 @@ class HandleDailyTask(HandleEmail):
         super().add_to_msg("Received request to update the daily tasks. \n")
         for task in tasks:
             super().add_to_msg(
-                f"{task['Name']} - T_Date: {task['ToDo On - Start']} / Date: {self.date_today}"
+                f"{task['Name']} - T_Date: {task['ToDo On']} / Date: {self.date_today}"
             )
             if (
                 task["Related To"] == "Daily"
-                and task["ToDo On - Start"] == self.date_today
+                and task["ToDo On"] == self.date_today
             ):
                 page_id = self.format_id(task["id"])
                 tmrw = self.decide_tmrw("Daily")
@@ -78,7 +78,7 @@ class HandleDailyTask(HandleEmail):
                 )
             elif (
                 task["Related To"] == "Daily Work Task"
-                and task["ToDo On - Start"] == self.date_today
+                and task["ToDo On"] == self.date_today
             ):
                 page_id = self.format_id(task["id"])
                 tmrw = self.decide_tmrw("Daily Work Task")

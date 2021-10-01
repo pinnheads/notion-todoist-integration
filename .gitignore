@@ -128,7 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-/Data/Tasks.csv
+*.csv
 .vscode
 save_env_keys.py
 .idea
