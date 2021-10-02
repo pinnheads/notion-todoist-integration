@@ -27,7 +27,11 @@ class HandleProjects:
                 headers={"Authorization": self.auth_key},
             )
         print("Deleted all the Projects")
-        os.remove("Data/projects.csv")
+        try:
+            os.remove("Data/projects.csv")
+        except FileNotFoundError:
+            print("File not found")
+            pass
         print("Deleted projects csv file")
 
     def create_project(self, project_name):
@@ -110,16 +114,16 @@ class HandleProjects:
 
     def check_project(self, p_name):
         try:
-            df = pd.read_csv("./Data/projects.csv", sep=",")
-            projects = df.to_dict(orient="records")
+            df = pd.read_csv("Data/projects.csv", sep=",")
         except FileNotFoundError:
             print("File not found")
             return True
         else:
-            for project in projects:
-                if project["project_name"] == p_name:
-                    self.found_project = project
-                    return False
-                else:
-                    print("project not found")
-                    return True
+            df = pd.read_csv("Data/projects.csv", sep=",")
+            project = df[df["project_name"] == p_name]
+            if project["project_name"].any():
+                self.found_project = project
+                return False
+            else:
+                print("not false")
+                return True
