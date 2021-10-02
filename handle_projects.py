@@ -16,10 +16,6 @@ class HandleProjects:
         self.section_ids = {}
         self.delete_all_projects()
 
-    # def handle_project_data(self):
-    #     try:
-    #         self.delete_all_projects()
-
     def delete_all_projects(self):
         projects = requests.get(
             "https://api.todoist.com/rest/v1/projects",
@@ -58,7 +54,6 @@ class HandleProjects:
                     46,
                 ]
             )
-            print(color)
             response = requests.post(
                 f"{self.base_url}/projects",
                 data=json.dumps({"name": project_name, "color": color}),
@@ -104,7 +99,6 @@ class HandleProjects:
         return df
 
     def write_to_file(self, project_data_frame):
-        print(project_data_frame)
         try:
             open("Data/projects.csv", "r")
         except FileNotFoundError:

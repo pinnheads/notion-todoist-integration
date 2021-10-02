@@ -89,11 +89,9 @@ class TodoistRequests(HandleEmail):
                     "priority": self.assign_priority(task["Priority"]),
                     "due_date": "" if task["ToDo On"] == 0 else task["ToDo On"],
                 }
-                print(new_task)
                 response = requests.post(
                     url=post_url, headers=headers, json=new_task
                 )
-                print(response.text)
                 response.raise_for_status()
                 super().add_to_msg(f"[Task] - {task['Name']} created")
             else:
