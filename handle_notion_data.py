@@ -16,7 +16,7 @@ class HandleNotionData(NotionRequests, HandleEmail):
         for data in data_list:
             desc += data["text"]["content"]
 
-        return desc.encode("unicode_escape").decode("utf-8")
+        return desc
 
     def format_notion_data(self):
         """
