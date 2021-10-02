@@ -31,7 +31,11 @@ class HandleNotionData(NotionRequests, HandleEmail):
         super().add_to_msg("\n\n")
         for task in tasks:
             id = task["id"]
-            name = task["properties"]["Name"]["title"][0]["plain_text"]
+            name = (
+                ""
+                if task["properties"]["Name"]["title"] == []
+                else task["properties"]["Name"]["title"][0]["plain_text"]
+            )
             status = task["properties"]["Status"]["select"]
             related_to = task["properties"]["Related To"]["select"]
             priority = task["properties"]["Priority"]["select"]
