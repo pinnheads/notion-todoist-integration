@@ -53,9 +53,7 @@ class HandleNotionData(NotionRequests, HandleEmail):
                     "id": id,
                     "Name": name,
                     "Status": "" if status == None else status["name"],
-                    "Related To": ""
-                    if related_to == None
-                    else related_to["name"],
+                    "Related To": "" if related_to == None else related_to["name"],
                     "Priority": "" if priority == None else priority["name"],
                     "ToDo On": "" if todo_on == None else todo_on["start"],
                     "Notes": notes,
