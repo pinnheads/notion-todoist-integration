@@ -87,11 +87,9 @@ class TodoistRequests(HandleEmail):
                     else task["Notes"],
                     "label_ids": self.assign_label_ids(task["Related To"]),
                     "priority": self.assign_priority(task["Priority"]),
-                    "due_date": "" if task["ToDo On"] == 0 else task["ToDo On"],
+                    # "due_date": "" if task["ToDo On"] == 0 else task["ToDo On"],
                 }
-                response = requests.post(
-                    url=post_url, headers=headers, json=new_task
-                )
+                response = requests.post(url=post_url, headers=headers, json=new_task)
                 response.raise_for_status()
                 super().add_to_msg(f"[Task] - {task['Name']} created")
             else:
@@ -106,15 +104,13 @@ class TodoistRequests(HandleEmail):
                     else task["Notes"],
                     "label_ids": self.assign_label_ids(task["Related To"]),
                     "priority": self.assign_priority(task["Priority"]),
-                    "due_date": "" if task["ToDo On"] == 0 else task["ToDo On"],
+                    # "due_date": "" if task["ToDo On"] == 0 else task["ToDo On"],
                     "project_id": created_project["project_id"],
                     "section_id": self.assign_section(
                         status=task["Status"], project=created_project
                     ),
                 }
-                response = requests.post(
-                    url=post_url, headers=headers, json=new_task
-                )
+                response = requests.post(url=post_url, headers=headers, json=new_task)
                 response.raise_for_status()
                 super().add_to_msg(f"[Task] - {task['Name']} created")
 
@@ -127,9 +123,7 @@ class TodoistRequests(HandleEmail):
         for task in all_tasks:
             delete_url = f"{self.base_url}/tasks/{task['id']}"
             requests.delete(url=delete_url, headers=self.headers)
-            super().add_to_msg(
-                f"Active tasks deleted from todoist. ID: {task['id']}"
-            )
+            super().add_to_msg(f"Active tasks deleted from todoist. ID: {task['id']}")
         super().add_to_msg("\n\n")
 
         super().add_to_msg("Yesterday's task were deleted...")
