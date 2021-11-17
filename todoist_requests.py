@@ -87,7 +87,7 @@ class TodoistRequests(HandleEmail):
                     else task["Notes"],
                     "label_ids": self.assign_label_ids(task["Related To"]),
                     "priority": self.assign_priority(task["Priority"]),
-                    # "due_date": "" if task["ToDo On"] == 0 else task["ToDo On"],
+                    "due_date": "" if task["ToDo On"] == 0 else task["ToDo On"],
                 }
                 response = requests.post(url=post_url, headers=headers, json=new_task)
                 response.raise_for_status()
@@ -104,7 +104,7 @@ class TodoistRequests(HandleEmail):
                     else task["Notes"],
                     "label_ids": self.assign_label_ids(task["Related To"]),
                     "priority": self.assign_priority(task["Priority"]),
-                    # "due_date": "" if task["ToDo On"] == 0 else task["ToDo On"],
+                    "due_date": "" if task["ToDo On"] == 0 else task["ToDo On"],
                     "project_id": created_project["project_id"],
                     "section_id": self.assign_section(
                         status=task["Status"], project=created_project
